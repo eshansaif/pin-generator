@@ -9,50 +9,95 @@
 </head>
 <body>
     <div class="container">
+        
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control" type="text">
-                    <button class="generate-btn">Generate Pin</button>
+                    <input id="display-random-number" class="form-control" type="text" disabled>
+                    <button id="generate-pin-btn" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="input-section half-width">
-                    <input class="form-control" type="text">
-                    <div class="numbers">
-                        <div class="calc-body">
-                            <div class="calc-button-row">
-                              <div class="button">7</div>
-                              <div class="button">8</div>
-                              <div class="button">9</div>
-                            </div>
-                            <div class="calc-button-row">
-                              <div class="button">4</div>
-                              <div class="button">5</div>
-                              <div class="button">6</div>
-                            </div>
-                            <div class="calc-button-row">
-                              <div class="button">1</div>
-                              <div class="button">2</div>
-                              <div class="button">3</div>
-                            </div>
-                            <div class="calc-button-row">
-                                <div class="button"><</div>
-                                <div class="button">0</div>
-                                <div class="button">C</div>
-                            </div>
-                            <div>
-                                <button type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
-                            </div>
+                    <div class="input-section half-width">
+                        <input id="display-input-number" class="form-control" type="text" value="">
+                        <div class="numbers">
+                            <div class="calc-body">
+                                <div class="calc-button-row">
+                                    <!-- <button class="button" value="7" onclick="calculate(this.value)"> </button> -->
+                                  <div class="button" value="7" onclick="displayNumber(7)">7</div>
+                                  <div class="button" value="8" onclick="displayNumber(8)">8</div>
+                                  <div class="button" value="9" onclick="displayNumber(9)">9</div>
+                                </div>
+                                <div class="calc-button-row">
+                                  <div class="button" value="4" onclick="displayNumber(4)">4</div>
+                                  <div class="button" value="5" onclick="displayNumber(5)">5</div>
+                                  <div class="button" value="6" onclick="displayNumber(6)">6</div>
+                                </div>
+                                <div class="calc-button-row">
+                                  <div class="button" value="1" onclick="displayNumber(1)">1</div>
+                                  <div class="button" value="2" onclick="displayNumber(2)">2</div>
+                                  <div class="button" value="3" onclick="displayNumber(3)">3</div>
+                                </div>
+                                <div class="calc-button-row">
+                                    <div class="button" onclick="backspace()"><</div>
+                                    <div class="button" onclick="displayNumber(0)">0</div>
+                                    <div id="clear" class="button">C</div>
+                                </div>
+                                <div>
+                                    <button id="submit" type="submit" class="submit-btn">Submit</button>
+                                    <p class="action-left">3 try left</p>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="notify-section">
-            <p class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        
         </div>
     </div>
+    <div class="notify-section">
+        <p class="notify" id="red-signal">❌ Pin Didn't Match, Please try again</p>
+        <p class="notify" id="green-sign">✅ Pin Matched... Secret door is opening for you</p>
+    </div>
+</div>
+
+
+    <script>
+        document.getElementById("generate-pin-btn").addEventListener("click",function(){
+            const randomNumber = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById("display-random-number").value = randomNumber;
+        })
+
+        function displayNumber(num) {
+            document.getElementById("display-input-number").value = document.getElementById("display-input-number").value +  num;
+        }
+
+
+        document.getElementById("submit").addEventListener("click",function(){
+            const displayRandomNumber = document.getElementById("display-random-number").value;
+            const displayInputNumber = document.getElementById("display-input-number").value;
+
+            if(displayRandomNumber == displayInputNumber){
+                document.getElementById("green-sign").style.display = "block";
+                document.getElementById("red-signal").style.display = "none";
+            }else{
+                document.getElementById("green-sign").style.display = "none";
+                document.getElementById("red-signal").style.display = "block";
+            }
+
+        })
+
+        //clear input field
+        document.getElementById("clear").addEventListener("click",function(){
+            document.getElementById("display-input-number").value = "";
+        })
+
+
+        //backspace input field
+        function backspace() {
+            var value = document.getElementById("display-input-number").value;
+            document.getElementById("display-input-number").value = value.substr(0, value.length - 1);
+        }
+
+    </script>
 </body>
 </html>
