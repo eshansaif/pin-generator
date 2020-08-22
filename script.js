@@ -23,6 +23,13 @@ function submitPinNumber() {
         document.getElementById("green-sign").style.display = "block";
         document.getElementById("red-signal").style.display = "none";
     }else{
+        //3 try left
+        const countAttempt = parseInt(document.getElementById("attempt-number").innerText) - 1;
+        document.getElementById("attempt-number").innerText = countAttempt;
+        if(countAttempt < 1){
+            document.getElementById("submit").style.display = "none";
+        }
+        
         document.getElementById("green-sign").style.display = "none";
         document.getElementById("red-signal").style.display = "block";
     }
