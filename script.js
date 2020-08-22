@@ -20,6 +20,7 @@ function submitPinNumber() {
     }
 
     if(displayRandomNumber == displayInputNumber){
+        document.getElementById("attempt-number").innerText = "3";
         document.getElementById("green-sign").style.display = "block";
         document.getElementById("red-signal").style.display = "none";
     }else{
