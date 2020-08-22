@@ -121,3 +121,12 @@ color: #E0B612;
     text-align: center;
 }
 
+#submit{
+    font-weight: bold;
+}
+
+#submit:disabled {
+    background: #dddddd;
+    color: #737cae;
+    font-weight: normal;
+  }
