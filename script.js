@@ -2,6 +2,12 @@
 function generateRandomPin() {
     const randomNumber = Math.floor(1000 + Math.random() * 9000);
     document.getElementById("display-random-number").value = randomNumber;
+
+    document.getElementById("submit").disabled = false;
+    document.getElementById("display-input-number").value = "";
+    document.getElementById("attempt-number").innerText = "3";
+    document.getElementById("green-sign").style.display = "none";
+    document.getElementById("red-signal").style.display = "none";
 }
 
 //Display number in the input field
@@ -19,11 +25,14 @@ function submitPinNumber() {
         return;
     }
 
+    if (displayRandomNumber == "") {
+        alert("You have to generate a random number First!");
+        return;
+    }
+
     if(displayRandomNumber == displayInputNumber){
         document.getElementById("attempt-number").innerText = "3";
-
-        document.getElementById("display-random-number").value = "";
-        document.getElementById("display-input-number").value = "";
+        document.getElementById("submit").disabled = true;
 
         document.getElementById("green-sign").style.display = "block";
         document.getElementById("red-signal").style.display = "none";
@@ -32,7 +41,7 @@ function submitPinNumber() {
         const countAttempt = parseInt(document.getElementById("attempt-number").innerText) - 1;
         document.getElementById("attempt-number").innerText = countAttempt;
         if(countAttempt < 1){
-            document.getElementById("submit").style.display = "none";
+            document.getElementById("submit").disabled = true; 
         }
         
         document.getElementById("green-sign").style.display = "none";
